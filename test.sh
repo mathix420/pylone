@@ -20,7 +20,9 @@ cat config.yaml
 
 echo ;
 
-pylone init
+pylone push -f
+pylone push -l
+pylone push
 
 cd "$OLD_PATH"
 
