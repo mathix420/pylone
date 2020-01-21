@@ -13,27 +13,22 @@ def init_app(options):
 
     project = PyloneProject(options, config)
 
-    if ask('Did you want to create a layer'):
-        project.create_layer()
 
-    if ask('Did you want to create a function'):
-        project.create_function()
-
-
-def create_fct(options):
+def create_app(options):
     config = get_global_config()
     if not config:
         exit('No config file found!')
+    print(config)
     project = PyloneProject(options, config)
-    project.create_function()
+    project.create_archi()
 
-
-def create_layer(options):
+def delete_app(options):
     config = get_global_config()
     if not config:
         exit('No config file found!')
+    print(config)
     project = PyloneProject(options, config)
-    project.create_layer()
+    project.delete_archi()
 
 
 def push_app(options):
@@ -41,7 +36,8 @@ def push_app(options):
     if not config:
         exit('No config file found!')
     project = PyloneProject(options, config)
-    if not options.functions_only:
-        project.push_layers()
-    if not options.layers_only:
-        project.push_functions()
+    project.update(options.stage)
+    # if not options.functions_only:
+    #     project.push_layers()
+    # if not options.layers_only:
+    #     project.push_functions()

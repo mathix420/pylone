@@ -3,6 +3,7 @@ import yaml
 
 from .questions import qload
 
+
 def get_global_config():
     if not os.path.exists('pylone.yaml'):
         return None
@@ -13,13 +14,13 @@ def get_global_config():
 
 def create_global_config():
     config = qload('global_config')
-    save_config(config, '.')
+    save_config(config)
     return config
 
 
-def save_config(config, path):
-    with open(os.path.join(path, 'pylone.yaml'), 'w+') as fp:
-        yaml.dump(config, fp, default_flow_style=False)
+def save_config(config):
+    with open('./pylone.yaml', 'w+') as fp:
+        yaml.dump(config, fp, default_flow_style=True, indent=2)
 
 
 def load_config(path):

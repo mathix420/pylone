@@ -6,24 +6,30 @@ Python serverless framework
 ## Start a project
 
 To start a new pylone project just type 
-```
+```bash
 pylone init
 ```
 ## Create a function
 
-```
+```bash
 pylone create-function
 ```
 
 ## Create a layer
 
-```
+```bash
 pylone create-layer
 ```
 
 ## Push architecture
 
+```bash
+pylone archi push
 ```
+
+## Update code and configs
+
+```bash
 pylone push
 ```
 

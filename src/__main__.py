@@ -3,8 +3,8 @@ import argparse
 from .handlers import (
     init_app,
     push_app,
-    create_fct,
-    create_layer,
+    create_app,
+    delete_app,
 )
 
 
@@ -22,31 +22,27 @@ init = subparser.add_parser(
 )
 init.set_defaults(handler=init_app)
 
-_create_fct = subparser.add_parser(
-    'create-function',
-    help='create a new function',
+init = subparser.add_parser(
+    'host',
+    help='host the project in cloud',
 )
-_create_fct.set_defaults(handler=create_fct)
+init.set_defaults(handler=create_app)
 
-_create_layer = subparser.add_parser(
-    'create-layer',
-    help='create a new layer',
+init = subparser.add_parser(
+    'delete',
+    help='delete the project from the cloud',
 )
-_create_layer.set_defaults(handler=create_layer)
+init.set_defaults(handler=delete_app)
 
 push = subparser.add_parser(
     'push',
-    help='create a new layer',
+    help='push modifications to the cloud',
 )
 push.add_argument(
-    '--functions-only', '-f',
-    action='store_true',
-    help='push only functions'
+    '--force-update', '-f', action='store_true', help='project stage', default=False
 )
 push.add_argument(
-    '--layers-only', '-l',
-    action='store_true',
-    help='push only layers'
+    '--stage', '-s', type=str, help='project stage', required=True
 )
 push.set_defaults(handler=push_app)
 

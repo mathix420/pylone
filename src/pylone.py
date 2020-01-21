@@ -3,53 +3,42 @@ from .providers import providers
 from .utils.dirs import makedirs
 from .questions import qload
 
+from .functions import PyloneFct
+from .layers import PyloneLayer
+from .apis import PyloneApi
+
 
 class PyloneProject():
-    functions = dict()
-    layers = dict()
+    functions = list()
+    layers = list()
+    apis = list()
 
     def __init__(self, options, config):
         self.config = config
         self.options = options
         self.provider = providers[config['cloud']](config)
-        # init functions
-        for fct in self.config.get('functions', []):
-            if not fct in self.functions:
-                self.functions[fct] = load_config(fct)
-        # init layers
-        for layer in self.config.get('layers', []):
-            if not layer in self.layers:
-                self.layers[layer] = load_config(layer)
+        self._init_classes()
 
-    def _save_state(self):
-        self.config['functions'] = list(self.functions.keys())
-        self.config['layers'] = list(self.layers.keys())
-        print('SAVE STATE')
-        print(self.functions)
-        print(self.layers)
-        print(self.config)
-        save_config(self.config, '.')
+    def _init_classes(self):
+        gcf = {
+            'provider': self.provider,
+        }
+        for cfg in self.config.get('functions', {}).values():
+            self.functions.append(PyloneFct(cfg, gcf))
+        for cfg in self.config.get('layers', {}).values():
+            self.layers.append(PyloneLayer(cfg, gcf))
+        for cfg in self.config.get('apis', {}).values():
+            self.apis.append(PyloneApi(cfg, gcf))
 
-    def create_function(self):
-        config = qload('create_function')
-        makedirs([config['name']])
-        save_config(config, config['name'])
-        self.functions[config['name']] = config
-        self._save_state()
+    def create_archi(self):
+        for elem in [*self.layers, *self.functions, *self.apis]:
+            elem.create()
 
-    def create_layer(self):
-        config = qload('create_layer')
-        makedirs([config['name']])
-        save_config(config, config['name'])
-        self.layers[config['name']] = config
-        self._save_state()
+    def delete_archi(self):
+        for elem in [*self.apis, *self.functions, *self.layers]:
+            elem.remove()
 
-    def push_functions(self):
-        print('push functions')
-        print(self.functions)
-        for name, config in self.functions:
-            self.provider.push_function(name, config)
-
-    def push_layers(self):
-        print('push layers')
-        print(self.layers)
+    def update(self, stage):
+        for elem in [*self.layers, *self.functions, *self.apis]:
+            if self.options.force_update or elem.check_for_update(stage):
+                elem.update(stage)
