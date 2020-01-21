@@ -1,2 +1,3 @@
 boto3>=1.10.24
 PyInquirer>=1.0.3
+python-dotenv>=0.10.5

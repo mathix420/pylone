@@ -1,11 +1,11 @@
-import os
-import json
-import boto3
-import shutil
 import datetime
+import shutil
+import boto3
+import json
+import os
 
-from ..utils.checksum import gen_sum
 from ..questions import qload
+from ..utils.checksum import gen_sum
 from botocore.client import ClientError
 
 
@@ -59,7 +59,7 @@ class AWSProvider():
 
     def _send_to_s3(self, path):
         if '.zip' in path:
-            shutil.move(path,'/tmp/update.zip')
+            shutil.move(path, '/tmp/update.zip')
         else:
             shutil.make_archive('/tmp/update', 'zip', path)
         key = gen_sum('/tmp/update.zip')
@@ -96,10 +96,13 @@ class AWSProvider():
                 'Timeout': config.get('timeout'),
                 'MemorySize': config.get('memory'),
                 'VpcConfig': config.get('vpc'),
-                'Environment': config.get('environ'),
                 'Layers': config.get('layers')
             }.items() if v
         }
+        if config.get('environ'):
+            others_configs['Environment'] = {
+                'Variables': config['environ']
+            }
 
         arn = self.lb_client.create_function(
             FunctionName=config['name'],
@@ -140,10 +143,14 @@ class AWSProvider():
                 'Timeout': config.get('timeout'),
                 'MemorySize': config.get('memory'),
                 'VpcConfig': config.get('vpc'),
-                'Environment': config.get('environ'),
                 'Layers': config.get('layers')
             }.items() if v
         }
+        if config.get('environ'):
+            others_configs['Environment'] = {
+                'Variables': config['environ']
+            }
+
         res = self.lb_client.update_function_code(
             FunctionName=config['name'],
             **code,

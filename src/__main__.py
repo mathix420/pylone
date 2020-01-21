@@ -1,3 +1,4 @@
+from dotenv import load_dotenv
 import argparse
 
 from .handlers import (
@@ -6,7 +7,6 @@ from .handlers import (
     create_app,
     delete_app,
 )
-
 
 parser = argparse.ArgumentParser('pylone')
 subparser = parser.add_subparsers(
@@ -48,6 +48,7 @@ push.set_defaults(handler=push_app)
 
 
 def main():
+    load_dotenv('.env')
     options = parser.parse_args()
 
     if options.handler:
