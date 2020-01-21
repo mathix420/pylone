@@ -13,12 +13,12 @@ def get_global_config():
 
 def create_global_config():
     config = qload('global_config')
-    save_config(config, '.', 'pylone')
+    save_config(config, '.')
     return config
 
 
-def save_config(config, path, name='config'):
-    with open(os.path.join(path, f'{name}.yaml'), 'w+') as fp:
+def save_config(config, path):
+    with open(os.path.join(path, 'pylone.yaml'), 'w+') as fp:
         yaml.dump(config, fp, default_flow_style=False)
 
 

@@ -28,7 +28,7 @@ class PyloneProject():
         print(self.functions)
         print(self.layers)
         print(self.config)
-        save_config(self.config, '.', 'pylone')
+        save_config(self.config, '.')
 
     def create_function(self):
         config = qload('create_function')

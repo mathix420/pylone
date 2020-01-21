@@ -27,16 +27,16 @@ pylone create-layer
 pylone push
 ```
 
-# Template
+# Template reference
 
-## source parameter
+## `source` parameter
 
 You can use the `source` parameter to force a directory to be used as source
 ```yaml
 source: ./bin
 ```
 
-## before-script parameter
+## `before-script` parameter
 
 You can use the `before-script` parameter to execute a bash script before processing an entity
 ```yaml
@@ -45,7 +45,7 @@ before-script: ./script.sh
 before-script: "echo 'Starting ...'"
 ```
 
-## after-script parameter
+## `after-script` parameter
 
 Similar as `before-script` but launch script at the end of process
 ```yaml
