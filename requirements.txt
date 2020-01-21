@@ -1,1 +1,2 @@
 boto3>=1.10.24
+PyInquirer>=1.0.3
