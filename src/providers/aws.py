@@ -85,7 +85,7 @@ class AWSProvider():
 
         if not config.get('role'):
             config['role'] = self.lambda_role or self._create_lambda_role()
-        if not os.path.isdir(path):
+        if not os.path.exists(path):
             raise Exception(f"Error in {config['name']}, source do not exist!")
         else:
             code = self._send_to_s3(path)
@@ -129,7 +129,7 @@ class AWSProvider():
         # TODO: stage
         if not config.get('role'):
             config['role'] = self.lambda_role or self._create_lambda_role()
-        if not os.path.isdir(path):
+        if not os.path.exists(path):
             raise Exception(f"Error in {config['name']}, source do not exist!")
         else:
             code = self._send_to_s3(path)
@@ -167,7 +167,7 @@ class AWSProvider():
     def publish_layer(self, config):
         path = config.get('source', config['name'])
 
-        if not os.path.isdir(path):
+        if not os.path.exists(path):
             raise Exception(f"Error in {config['name']}, source do not exist!")
         else:
             code = self._send_to_s3(path)
