@@ -20,7 +20,7 @@ def create_global_config():
 
 def save_config(config):
     with open('./pylone.yaml', 'w+') as fp:
-        yaml.dump(config, fp, default_flow_style=True, indent=2)
+        yaml.dump(config, fp, default_flow_style=False, indent=2)
 
 
 def load_config(path):

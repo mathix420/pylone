@@ -1,6 +1,7 @@
 from .config import save_config, load_config
 from .providers import providers
 from .utils.dirs import makedirs
+from .utils.scripts import run
 from .questions import qload
 
 from .functions import PyloneFct
@@ -32,7 +33,11 @@ class PyloneProject():
 
     def create_archi(self):
         for elem in [*self.layers, *self.functions, *self.apis]:
+            if elem.cf.get('before-script'):
+                run(elem.cf['before-script'])
             elem.create()
+            if elem.cf.get('after-script'):
+                run(elem.cf['after-script'])
 
     def delete_archi(self):
         for elem in [*self.apis, *self.functions, *self.layers]:
@@ -41,4 +46,8 @@ class PyloneProject():
     def update(self, stage):
         for elem in [*self.layers, *self.functions, *self.apis]:
             if self.options.force_update or elem.check_for_update(stage):
+                if elem.cf.get('before-script'):
+                    run(elem.cf['before-script'])
                 elem.update(stage)
+                if elem.cf.get('after-script'):
+                    run(elem.cf['after-script'])
