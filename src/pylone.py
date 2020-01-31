@@ -38,12 +38,12 @@ class PyloneProject():
             elem.create()
             if elem.cf.get('after-script'):
                 run(elem.cf['after-script'])
-        print(f'{self.config["name"]} hosted successfully')
+        print(f'🚀 {self.config["name"]} hosted successfully')
 
     def delete_archi(self):
         for elem in [*self.apis, *self.functions, *self.layers]:
             elem.remove()
-        print(f'{self.config["name"]} removed successfully')
+        print(f'🤯 {self.config["name"]} removed successfully')
 
     def update(self, stage):
         for elem in [*self.layers, *self.functions, *self.apis]:
@@ -53,5 +53,4 @@ class PyloneProject():
                 elem.update(stage)
                 if elem.cf.get('after-script'):
                     run(elem.cf['after-script'])
-        print(f'{self.config["name"]} updated successfully')
-
+        print(f'🦄 {self.config["name"]} updated successfully')
