@@ -1,0 +1,53 @@
+name: GraphQL-API
+region: eu-west-1
+cloud: aws
+
+stages:
+    - dev
+    - prod
+
+functions:
+    GraphQL-Provider:
+        name: GraphQL-Provider
+        description: Provide a serverless GraphQL API
+        handler: src.handler
+        runtime: nodejs12.x
+        memory: 1024
+        source: ./src
+        timeout: 25
+
+# layers:
+#     PythonDeps:
+#         name: PythonDeps
+#         description: Contains all needed python dependencies
+#         runtimes:
+#             - python3.8
+#             - python3.7
+#             - python3.6
+#         before-script: >
+#             pip install -r requirements.txt --target ./dependencies;
+#         source: ./src
+
+# apis:
+#     PeachAPI:
+#         name: PeachAPI
+#         description: Serverless Peach API
+#         type: REGIONAL
+#         stages:
+#             - dev
+#             - prod
+#         routes:
+#             /graphql:
+#                 method: ANY
+#                 attach: GraphQL-Provider
+#             /todo:
+#                 method: GET
+#                 childs:
+#                     /create:
+#                         method: PUT
+#                     /delete:
+#                         method: DELETE
+#             /get:
+#                 childs:
+#                     /{id}:
+#                         method: GET
