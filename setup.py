@@ -23,6 +23,12 @@ setup(
                 'Programming Language :: Python :: 3.8',
                 'Programming Language :: Python :: 3.9',
     ],
+    install_requires=[
+        'python-dotenv',
+        'pyyaml',
+        'PyInquerer',
+        'boto3',
+    ],
     packages=['src', 'src.utils', 'src.providers', 'src.questions'],
     entry_points={'console_scripts': ['pylone=src.__main__:main']},
 )
