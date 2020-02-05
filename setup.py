@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
     name='pylone',
-    version='0.1',
+    version='0.1.1',
     description='A Python Serverless framework',
     long_description=open('README.md').read(),
     url='https://github.com/mathix420/pylone',
