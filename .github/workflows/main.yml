@@ -1,4 +1,4 @@
-name: Pylone automations
+name: PyPi deployment
 
 on:
   push:
@@ -11,13 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install deps
-        run: |
-          pip3 install setuptools==45.1.0
-          pip3 install twine==3.1.1
+        run: pip3 install --upgrade setuptools wheel twine
       - name: Checkout
         uses: actions/checkout@v2
-      - name: list files
-        run: pip3 --version
       - name: Building pylone
         run: python3 setup.py sdist bdist_wheel
       - name: Publishing
