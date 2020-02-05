@@ -20,4 +20,4 @@ jobs:
       - name: Building pylone
         run: python3 setup.py sdist bdist_wheel
       - name: Publishing
-        run: "python3 -m twine upload --repository-url https://test.pypi.org/legacy/ dist/* -u 'mathix420' -p '${{ secrets.PYPI_PASSWORD }}'"
+        run: "python3 -m twine upload --repository-url https://upload.pypi.org/legacy/ dist/* -u 'mathix420' -p '${{ secrets.PYPI_PASSWORD }}'"
