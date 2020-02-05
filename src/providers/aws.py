@@ -13,9 +13,10 @@ class AWSProvider():
     creds = dict()
     lambda_role = None
 
-    def __init__(self, global_config):
-        self._init_creds()
+    def __init__(self, global_config, options):
         self.gb = global_config
+        self.go = options
+        self._init_creds()
         self.lb_client = boto3.client(
             'lambda',
             region_name=global_config['region'],
@@ -30,20 +31,20 @@ class AWSProvider():
         )
 
     def _init_creds(self):
-        if not os.path.exists('.creds'):
-            self._create_creds()
-        else:
-            with open('.creds') as fp:
+        if os.path.exists(self.go.creds_path):
+            with open(self.go.creds_path) as fp:
                 j = json.load(fp)
 
             if 'aws' in j:
                 self.creds = j['aws']
             else:
                 self._create_creds()
+        else:
+            self._create_creds()
 
     def _create_creds(self):
         self.creds = qload('credentials')
-        with open('.creds', 'w+') as fp:
+        with open(self.go.creds_path, 'w+') as fp:
             json.dump({'aws': self.creds}, fp)
 
     def _create_lambda_role(self):

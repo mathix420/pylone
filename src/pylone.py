@@ -17,7 +17,7 @@ class PyloneProject():
     def __init__(self, options, config):
         self.config = config
         self.options = options
-        self.provider = providers[config['cloud']](config)
+        self.provider = providers[config['cloud']](config, options)
         self._init_classes()
 
     def _init_classes(self):

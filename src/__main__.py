@@ -9,6 +9,10 @@ from .handlers import (
 )
 
 parser = argparse.ArgumentParser('pylone')
+
+parser.add_argument('--creds-path', '-c', type=str,
+                    help="Credential path", default=".creds")
+
 subparser = parser.add_subparsers(
     dest='action',
     title='action',
