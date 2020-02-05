@@ -14,6 +14,8 @@ jobs:
         run: |
           pip3 install setuptools
           pip3 install twine
+      - name: list files
+        run: ls -lah
       - name: Building pylone
         run: python3 setup.py sdist bdist_wheel
       - name: Publishing
