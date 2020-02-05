@@ -9,6 +9,7 @@ setup(
     author='Arnaud Gissinger',
     author_email='agissing@student.42.fr',
     license='MIT',
+    python_requires='>=3.6',
     classifiers=[
                 'Intended Audience :: Developers',
                 'Intended Audience :: System Administrators',
@@ -17,17 +18,17 @@ setup(
 
                 'License :: OSI Approved :: MIT License',
 
-                'Programming Language :: Python :: 3 :: Only'
+                'Programming Language :: Python :: 3 :: Only',
                 'Programming Language :: Python :: 3.6',
                 'Programming Language :: Python :: 3.7',
                 'Programming Language :: Python :: 3.8',
                 'Programming Language :: Python :: 3.9',
     ],
     install_requires=[
-        'python-dotenv',
-        'pyyaml',
-        'PyInquerer',
-        'boto3',
+        'python-dotenv==0.10.5',
+        'PyInquirer==1.0.3',
+        'PyYAML>=3.13',
+        'boto3>=1.11.6',
     ],
     packages=['src', 'src.utils', 'src.providers', 'src.questions'],
     entry_points={'console_scripts': ['pylone=src.__main__:main']},
