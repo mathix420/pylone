@@ -1,0 +1,18 @@
+name: Pylone automations
+
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  publish:
+    name: Publish pylone
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install deps
+        run: pip3 install twine
+      - name: Building pylone
+        run: python3 setup.py sdist bdist_wheel
+      - name: Publishing
+        run: twine upload --repository-url https://test.pypi.org/legacy/ dist/* -u mathix420 -p ${{ secrets.PYPI_PASSWORD }}
