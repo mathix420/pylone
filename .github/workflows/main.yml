@@ -14,6 +14,8 @@ jobs:
         run: |
           pip3 install setuptools
           pip3 install twine
+      - name: Checkout
+        uses: actions/checkout@v2
       - name: list files
         run: ls -lah
       - name: Building pylone
