@@ -18,7 +18,7 @@ def get_global_config():
     if not os.path.exists('pylone.yaml'):
         return None
     with open('pylone.yaml') as fp:
-        config = yaml.load(set_env(fp))
+        config = yaml.safe_load(set_env(fp))
     return config
 
 
