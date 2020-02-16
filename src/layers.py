@@ -8,7 +8,8 @@ class PyloneLayer():
         self.provider = global_config['provider']
 
     def check_for_update(self, stage):
-        pass
+        # TODO:
+        return True
 
     def update(self, stage):
         self.provider.publish_layer(self.cf)

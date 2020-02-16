@@ -1,4 +1,4 @@
-from setuptools import setup
+from setuptools import setup, find_namespace_packages
 
 setup(
     name='pylone',
@@ -30,6 +30,6 @@ setup(
         'PyYAML>=3.13',
         'boto3>=1.11.6',
     ],
-    packages=['src', 'src.utils', 'src.providers', 'src.questions'],
+    packages=find_namespace_packages(include=["src", "src.*"]),
     entry_points={'console_scripts': ['pylone=src.__main__:main']},
 )

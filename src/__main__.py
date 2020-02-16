@@ -46,7 +46,7 @@ push.add_argument(
     '--force-update', '-f', action='store_true', help='project stage', default=False
 )
 push.add_argument(
-    '--stage', '-s', type=str, help='project stage', required=True
+    '--stage', '-s', type=str, help='project stage', default='dev'
 )
 push.set_defaults(handler=push_app)
 
