@@ -3,6 +3,8 @@ import json
 import boto3
 
 from ...questions import qload
+from ...utils.gitignore import add_to_gitignore
+
 
 def _init_creds(self):
     if os.path.exists(self.go.creds_path):
@@ -16,7 +18,9 @@ def _init_creds(self):
     else:
         self._create_creds()
 
+
 def _create_creds(self):
     self.creds = qload('credentials')
     with open(self.go.creds_path, 'w+') as fp:
         json.dump({'aws': self.creds}, fp)
+    add_to_gitignore(self.go.creds_path.split('/')[-1])
