@@ -13,6 +13,9 @@ functions:
         description: Provide a serverless GraphQL API
         handler: src.handler
         runtime: nodejs12.x
+        environ:
+            !env EMAIL
+            !env PASS
         memory: 1024
         timeout: 25
 

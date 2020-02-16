@@ -1,6 +1,3 @@
-from .config import load_config
-
-
 class PyloneApi():
     def __init__(self, config, global_config):
         self.cfg = config
