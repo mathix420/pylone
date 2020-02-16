@@ -9,45 +9,29 @@ from .handlers import (
 )
 
 parser = argparse.ArgumentParser('pylone')
+parser.add_argument('--creds-path', '-c', metavar='PATH', type=str, help="Credential path", default=".creds")
 
-parser.add_argument('--creds-path', '-c', type=str,
-                    help="Credential path", default=".creds")
-
+# SUBPARSER CONFIG
 subparser = parser.add_subparsers(
-    dest='action',
-    title='action',
-    description='Pylone actions',
-    required=True
-)
+    dest='action', title='action', description='Pylone actions', required=True)
 
-init = subparser.add_parser(
-    'init',
-    help='initialise a new project',
-)
+# INIT
+init = subparser.add_parser('init', help='initialize a new project')
 init.set_defaults(handler=init_app)
 
-init = subparser.add_parser(
-    'host',
-    help='host the project in cloud',
-)
-init.set_defaults(handler=create_app)
+# HOST
+host = subparser.add_parser('host', help='host project in the cloud')
+host.set_defaults(handler=create_app)
 
-init = subparser.add_parser(
-    'delete',
-    help='delete the project from the cloud',
-)
-init.set_defaults(handler=delete_app)
+# DELETE
+delete = subparser.add_parser('delete', help='delete project from the cloud')
+delete.set_defaults(handler=delete_app)
 
-push = subparser.add_parser(
-    'push',
-    help='push modifications to the cloud',
-)
-push.add_argument(
-    '--force-update', '-f', action='store_true', help='project stage', default=False
-)
-push.add_argument(
-    '--stage', '-s', type=str, help='project stage', default='dev'
-)
+# PUSH
+push = subparser.add_parser('push', help='push modifications to the cloud')
+push.add_argument('--force-update', '-f', action='store_true', help='force project update', default=False)
+push.add_argument('--stage', '-s', type=str, help='project stage', default='dev')
+push.add_argument('projects', metavar='NAME', type=str, nargs='*', help='projects to push (all by default)')
 push.set_defaults(handler=push_app)
 
 

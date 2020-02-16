@@ -2,7 +2,7 @@ import os
 import boto3
 import shutil
 
-from ...utils.checksum import gen_sum
+from ...utils.checksum import md5_file
 from botocore.client import ClientError
 
 
@@ -28,7 +28,7 @@ def _send_to_s3(self, path):
         shutil.move(path, '/tmp/update.zip')
     else:
         shutil.make_archive('/tmp/update', 'zip', path)
-    key = gen_sum('/tmp/update.zip')
+    key = md5_file('/tmp/update.zip')
     if not self._bucket_exist('pylone-bucket'):
         self.s3.create_bucket(
             Bucket='pylone-bucket',

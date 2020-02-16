@@ -1,13 +1,14 @@
 name: GraphQL-API
 region: eu-west-1
 cloud: aws
+watcher: true
 
 stages:
     - dev
     - prod
 
 functions:
-    GraphQL-Provider:
+    graphQL:
         name: GraphQL-Provider
         description: Provide a serverless GraphQL API
         handler: src.handler

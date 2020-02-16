@@ -18,7 +18,6 @@ def create_app(options):
     config = get_global_config()
     if not config:
         exit('No config file found!')
-    print(config)
     project = PyloneProject(options, config)
     project.create_archi()
 
@@ -26,7 +25,6 @@ def delete_app(options):
     config = get_global_config()
     if not config:
         exit('No config file found!')
-    print(config)
     project = PyloneProject(options, config)
     project.delete_archi()
 

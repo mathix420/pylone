@@ -47,4 +47,5 @@ def delete_layer(self, config):
                 VersionNumber=layer['Version']
             )
         except Exception as e:
+            print('Error when deleting a version layer')
             print(e)

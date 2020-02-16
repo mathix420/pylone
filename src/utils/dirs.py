@@ -7,4 +7,5 @@ def makedirs(directories):
 		except FileExistsError:
 			print(directory, 'already exists')
 		except Exception as e:
+			print('Error when creating directories')
 			print(e)
