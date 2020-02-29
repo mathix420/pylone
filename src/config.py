@@ -14,7 +14,6 @@ def get_global_config():
         return None
     with open('pylone.yaml') as fp:
         config = yaml.load(fp, yaml.SafeLoader)
-    print(config)
     return config
 
 

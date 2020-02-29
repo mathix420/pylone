@@ -43,7 +43,7 @@ def update_function(self, config, stage):
     res = self.lb_client.update_function_code(
         FunctionName=config['name'],
         **code,
-        Publish=(stage != self.gb.stages[0]),
+        Publish=(stage != self.gb['stages'][0]),
     )
     self.lb_client.update_function_configuration(
         FunctionName=config['name'],
@@ -52,7 +52,7 @@ def update_function(self, config, stage):
         Handler=config['handler'],
         **others_configs
     )
-    if stage == self.gb.stages[0]:
+    if stage == self.gb['stages'][0]:
         return
     self.lb_client.update_alias(
         Name=stage,
