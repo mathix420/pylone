@@ -1,4 +1,4 @@
-from .config import save_config, load_config
+from .config import save_config
 from .providers import providers
 from .utils.dirs import makedirs
 from .utils.scripts import run

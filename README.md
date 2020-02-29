@@ -3,37 +3,22 @@ Python serverless framework
 
 # Usage
 
-## Start a project
-
-To start a new pylone project just type 
-```bash
-pylone init
-```
-## Create a function
+## Pylone usage
 
 ```bash
-pylone create-function
-```
-
-## Create a layer
-
-```bash
-pylone create-layer
-```
-
-## Push architecture
-
-```bash
-pylone archi push
-```
-
-## Update code and configs
-
-```bash
-pylone push
+pylone -h
 ```
 
 # Template reference
+
+## `stages` global parameter
+
+You can set the `stages` parameter to have a multistage project
+```yaml
+stages:
+    - dev # first one is used as default stage
+    - prod # all other stages are more advanced stages
+```
 
 ## `source` parameter
 

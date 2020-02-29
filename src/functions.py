@@ -1,5 +1,4 @@
 from botocore.exceptions import ClientError
-from .config import load_config
 
 
 class PyloneFct():
