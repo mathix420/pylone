@@ -14,8 +14,8 @@ functions:
         handler: src.handler
         runtime: nodejs12.x
         environ:
-            !env EMAIL
-            !env PASS
+            EMAIL: !env EMAIL
+            PASS: !env PASS
         memory: 1024
         timeout: 25
 

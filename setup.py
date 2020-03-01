@@ -2,9 +2,10 @@ from setuptools import setup, find_namespace_packages
 
 setup(
     name='pylone',
-    version='0.1.5',
+    version='0.1.6',
     description='A Python Serverless framework',
     long_description=open('README.md').read(),
+    long_description_content_type='text/markdown',
     url='https://github.com/mathix420/pylone',
     author='Arnaud Gissinger',
     author_email='agissing@student.42.fr',
