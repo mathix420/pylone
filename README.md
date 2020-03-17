@@ -1,5 +1,7 @@
-# pylone
-Python serverless framework
+<p align="center"><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/google/223/tokyo-tower_1f5fc.png"></p><br/>
+<h1 align="center">PYLONE</h1><br/>
+<h3 align="center">Python CD framework</h3><br/>
+
 
 # Usage
 
