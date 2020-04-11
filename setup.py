@@ -2,7 +2,7 @@ from setuptools import setup, find_namespace_packages
 
 setup(
     name='pylone',
-    version='0.1.8',
+    version='0.1.9',
     description='A Python Serverless framework',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
@@ -31,6 +31,6 @@ setup(
         'PyYAML>=3.13',
         'boto3>=1.11.6',
     ],
-    packages=find_namespace_packages(include=["src", "src.*"]),
-    entry_points={'console_scripts': ['pylone=src.__main__:main']},
+    packages=find_namespace_packages(include=["pylone", "pylone.*"]),
+    entry_points={'console_scripts': ['pylone=pylone.__main__:main']},
 )
