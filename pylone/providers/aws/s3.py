@@ -26,8 +26,14 @@ def _bucket_exist(self, bucket):
 def _send_to_s3(self, path):
     if '.zip' in path:
         shutil.move(path, '/tmp/update.zip')
-    else:
+    elif os.path.isdir(path):
         shutil.make_archive('/tmp/update', 'zip', path)
+    elif os.path.isfile(path):
+        root_dir = os.path.dirname(path)
+        filename = os.path.basename(path)
+        shutil.make_archive('/tmp/update', 'zip', root_dir, filename)
+    else:
+        raise Exception('Not a file or directory')
     key = md5_file('/tmp/update.zip')
     if not self._bucket_exist('pylone-bucket'):
         self.s3.create_bucket(
