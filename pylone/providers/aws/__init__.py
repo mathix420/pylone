@@ -18,6 +18,10 @@ class AWSProvider():
     from .shared import _create_creds, _init_creds
 
     def __init__(self, global_config, options):
+        """
+        gb => pylone.yaml config of the AWS object (ex: lambda)
+        go => CLI params
+        """
         self.gb = global_config
         self.go = options
         self._init_creds()
