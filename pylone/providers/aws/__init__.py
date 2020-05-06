@@ -19,7 +19,7 @@ class AWSProvider():
 
     def __init__(self, global_config, options):
         """
-        gb => pylone.yaml config of the AWS object (ex: lambda)
+        gb => pylone.yaml
         go => CLI params
         """
         self.gb = global_config

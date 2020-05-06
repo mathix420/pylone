@@ -23,13 +23,12 @@ def _bucket_exist(self, bucket):
     return True
 
 
-def _send_to_s3(self, path):
-    if self.gb.get('as-module') and os.path.isdir(path):
+def _send_to_s3(self, path, config):
+    if config.get('as-module') and os.path.isdir(os.path.join('..', path)):
         shutil.make_archive('/tmp/update', 'zip', '..', path)
-    elif self.gb.get('as-module'):
+    elif config.get('as-module'):
         raise Exception('Push as module only support directories')
-
-    if '.zip' in path:
+    elif '.zip' in path:
         shutil.move(path, '/tmp/update.zip')
     elif os.path.isdir(path):
         shutil.make_archive('/tmp/update', 'zip', path)
