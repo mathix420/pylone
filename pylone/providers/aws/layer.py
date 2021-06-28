@@ -6,7 +6,7 @@ def publish_layer(self, config):
     if not os.path.exists(path):
         raise Exception(f"Error in {config['name']}, source do not exist!")
     else:
-        code = self._send_to_s3(path)
+        code = self._send_to_s3(path, config)
 
     others_configs = {
         k: v for k, v in {
