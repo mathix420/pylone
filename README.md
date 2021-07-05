@@ -47,3 +47,12 @@ after-script: ./script.sh
 # OR
 after-script: "echo 'END of process'"
 ```
+
+## `bucket-name` parameter
+
+> Default value: `pylone-bucket`
+
+Allows you to choose the bucket name where pylone will upload zip files.
+```yaml
+bucket-name: tmp-pylone-files
+```

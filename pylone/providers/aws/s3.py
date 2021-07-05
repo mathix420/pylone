@@ -6,6 +6,9 @@ from ...utils.checksum import md5_file
 from botocore.client import ClientError
 
 
+DEFAULT_BUCKET_NAME = 'pylone-bucket'
+
+
 def init_s3(self):
     self.s3 = boto3.resource(
         's3',
@@ -39,19 +42,18 @@ def _send_to_s3(self, path, config):
     else:
         raise Exception('Not a file or directory')
     key = md5_file('/tmp/update.zip')
-    if not self._bucket_exist('pylone-bucket'):
+    bucket_name = self.gb.get('bucket-name', DEFAULT_BUCKET_NAME)
+    if not self._bucket_exist(bucket_name):
         self.s3.create_bucket(
-            Bucket='pylone-bucket',
-            CreateBucketConfiguration={
-                'LocationConstraint': self.gb['region']
-            }
+            Bucket=bucket_name,
+            CreateBucketConfiguration={'LocationConstraint': self.gb['region']}
         )
     self.s3.meta.client.upload_file(
         '/tmp/update.zip',
-        'pylone-bucket',
+        bucket_name,
         key,
     )
     return {
-        'S3Bucket': 'pylone-bucket',
+        'S3Bucket': bucket_name,
         'S3Key': key
     }
