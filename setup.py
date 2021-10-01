@@ -2,7 +2,7 @@ from setuptools import setup, find_namespace_packages
 
 setup(
     name='pylone',
-    version='0.1.14',
+    version='0.2.0',
     description='A Python Serverless framework',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
