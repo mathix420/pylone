@@ -1,7 +1,7 @@
 #!/bin/bash
 
-docker build -t pylone .
+docker build -t plsr/pylone .
 
-docker run pylone
+docker run plsr/pylone
 
-docker run --name pylone --rm -i -t pylone '/bin/sh'
+docker run --name plsr/pylone --rm -i -t plsr/pylone '/bin/sh'
