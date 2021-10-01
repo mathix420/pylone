@@ -46,7 +46,7 @@ def _send_to_s3(self, path, config):
     if not self._bucket_exist(bucket_name):
         self.s3.create_bucket(
             Bucket=bucket_name,
-            CreateBucketConfiguration={'LocationConstraint': self.gb['region']}
+            # CreateBucketConfiguration={'LocationConstraint': self.gb['region']}
         )
     self.s3.meta.client.upload_file(
         '/tmp/update.zip',

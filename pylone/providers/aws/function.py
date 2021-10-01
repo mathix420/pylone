@@ -1,4 +1,5 @@
 import os
+import time
 import boto3
 
 def init_lambda(self):
@@ -14,6 +15,26 @@ def delete_function(self, config):
     return self.lb_client.delete_function(
         FunctionName=config['name'],
     )
+
+
+def wait_for_lambda_to_be_ready(self, function_name):
+    """
+    Checks if a lambda function is active and no updates are in progress.
+    """
+    ttw = 1
+    is_ok = None
+    while not is_ok:
+        if is_ok != None:
+            print(f'😴 Waiting for lambda to be ready ({ttw}s) ...')
+            time.sleep(ttw)
+            if ttw < 8:
+                ttw *= 2
+
+        response = self.lb_client.get_function(FunctionName=function_name)
+        is_ok = (response["Configuration"]["State"] == "Active"
+            and response["Configuration"]["LastUpdateStatus"] != "InProgress")
+
+    return is_ok
 
 
 def update_function(self, config, stage):
@@ -47,6 +68,12 @@ def update_function(self, config, stage):
         **code,
         Publish=(stage != self.gb['stages'][0]),
     )
+
+    # To avoid ResourceConflictException
+    # https://github.com/zappa/Zappa/issues/1041
+    # https://github.com/zappa/Zappa/pull/1042)
+    wait_for_lambda_to_be_ready(self, config['name'])
+
     self.lb_client.update_function_configuration(
         FunctionName=config['name'],
         Runtime=config.get('runtime', 'provided'),
