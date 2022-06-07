@@ -23,5 +23,9 @@ def load_doppler(secret, project, config):
 
     response = requests.get(url, params=params, headers=headers)
 
+    if response.status_code != 200:
+        print(response.text)
+        exit('Bad response code from Doppler')
+
     for key, value in response.json().items():
         environ[key] = value
