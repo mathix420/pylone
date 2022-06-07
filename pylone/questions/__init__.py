@@ -1,5 +1,3 @@
-import os
-import json
 from PyInquirer import prompt
 from . import (
     create_function,

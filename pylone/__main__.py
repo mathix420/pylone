@@ -1,6 +1,8 @@
 from dotenv import load_dotenv
+from os import getenv
 import argparse
 
+from .utils.doppler import load_doppler
 from .handlers import (
     init_app,
     push_app,
@@ -10,6 +12,9 @@ from .handlers import (
 
 parser = argparse.ArgumentParser('pylone')
 parser.add_argument('--creds-path', '-c', metavar='PATH', type=str, help="Credential path", default=".creds")
+parser.add_argument('--doppler-project', '--dp', metavar='PROJECT', type=str, help="Doppler project id")
+parser.add_argument('--doppler-config', '--dc', metavar='CONFIG', type=str, help="Doppler config name")
+parser.add_argument('--doppler-token', '--dt', metavar='TOKEN', type=str, help="Doppler service token", default=getenv('DOPPLER_TOKEN'))
 
 # SUBPARSER CONFIG
 subparser = parser.add_subparsers(
@@ -36,8 +41,11 @@ push.set_defaults(handler=push_app)
 
 
 def main():
-    load_dotenv('.env')
     options = parser.parse_args()
+    if options.doppler_token:
+        load_doppler(options.doppler_token, options.doppler_project, options.doppler_config)
+    else:
+        load_dotenv('.env')
 
     if options.handler:
         options.handler(options)
