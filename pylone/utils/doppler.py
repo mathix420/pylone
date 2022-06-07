@@ -11,7 +11,7 @@ def load_doppler(secret, project, config):
         **({'config': config} if config else {}),
         **({'project': project} if project else {}),
         'include_dynamic_secrets': False,
-        'dynamic_secrets_ttl_sec': 1800,
+        # 'dynamic_secrets_ttl_sec': 1800,
     }
 
     auth = b64encode(secret.encode('utf-8') + b':').decode('utf-8')
