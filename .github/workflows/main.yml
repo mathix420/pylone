@@ -43,7 +43,7 @@ jobs:
         id: image-uri
         run: |
           current_version=$(cat setup.py | grep version | awk -F "'" '{print $2}')
-          echo "::set-output name=tag1::${{ secrets.DOCKERHUB_USERNAME }}/pylone:$current_version"
+          echo "::set-output name=tag1::${{ secrets.DOCKERHUB_USERNAME }}/pylone:latest"
           echo "::set-output name=tag2::${{ secrets.DOCKERHUB_USERNAME }}/pylone:$current_version"
 
       - name: Build and push Docker image
