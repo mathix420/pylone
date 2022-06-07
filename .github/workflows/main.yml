@@ -1,14 +1,14 @@
 name: PyPi deployment
 
 on:
-  push:
-    branches:
-    - master
+  release:
+    types: [published]
+  workflow_dispatch:
 
 jobs:
   publish:
     name: Publish pylone
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
     steps:
       - name: Install deps
         run: |
@@ -21,3 +21,35 @@ jobs:
         run: python3 setup.py sdist bdist_wheel
       - name: Publishing
         run: "python3 -m twine upload --repository-url https://upload.pypi.org/legacy/ dist/* -u 'mathix420' -p '${{ secrets.PYPI_PASSWORD }}'"
+
+  deploy_docker:
+    name: Deploy docker
+    runs-on: ubuntu-20.04
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v3
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Set Image URI
+        id: image-uri
+        run: |
+          current_version=$(cat setup.py | grep version | awk -F "'" '{print $2}')
+          echo "::set-output name=tag1::${{ secrets.DOCKERHUB_USERNAME }}/pylone:$current_version"
+          echo "::set-output name=tag2::${{ secrets.DOCKERHUB_USERNAME }}/pylone:$current_version"
+
+      - name: Build and push Docker image
+        uses: docker/build-push-action@v3
+        id: build-image
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.image-uri.outputs.tag1 }}, ${{ steps.image-uri.outputs.tag2 }}

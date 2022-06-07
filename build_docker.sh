@@ -1,7 +1,8 @@
 #!/bin/bash
 
-docker build -t plsr/pylone .
+current_version=$(cat setup.py | grep version | awk -F "'" '{print $2}')
 
-docker run plsr/pylone
+docker build -t "plsr/pylone:latest" -t "plsr/pylone:$current_version" .
 
-docker run --name plsr/pylone --rm -i -t plsr/pylone '/bin/sh'
+# docker run plsr/pylone
+# docker run --name plsr/pylone --rm -i -t plsr/pylone '/bin/sh'
