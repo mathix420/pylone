@@ -14,9 +14,11 @@ def load_doppler(secret, project, config):
         'dynamic_secrets_ttl_sec': 1800,
     }
 
+    auth = b64encode(secret.encode('utf-8') + b':').decode('utf-8')
+
     headers = {
         "Accept": "application/json",
-        "Authorization": f"Basic {b64encode(secret + ':').decode('utf-8')}"
+        "Authorization": f"Basic {auth}"
     }
 
     response = requests.get(url, params=params, headers=headers)
