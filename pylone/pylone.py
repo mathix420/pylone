@@ -1,5 +1,6 @@
 from .providers import providers
 from .utils.scripts import run
+from argparse import Namespace
 from PyInquirer import prompt
 from .questions import ask
 from typing import List
@@ -14,18 +15,32 @@ class PyloneProject():
     layers: List[PyloneLayer] = list()
     apis: List[PyloneApi] = list()
 
-    def __init__(self, options, config):
+    def __init__(self, options: Namespace, config):
         self.config = config
         self.options = options
         self.provider = providers[config['cloud']](config, options)
         self._init_classes()
+
+    def inject_doppler_envs(self, cfg):
+        if not self.options.doppler_token:
+            return cfg
+
+        if isinstance(cfg.get('environ'), dict):
+            cfg['environ'] = {
+                **cfg['environ'],
+                **self.options.doppler_env
+            }
+        elif not cfg.get('environ'):
+            cfg['environ'] = self.options.doppler_env
+        return cfg
 
     def _init_classes(self):
         gcf = {
             'provider': self.provider,
         }
         for cfg in self.config.get('functions', {}).values():
-            self.functions.append(PyloneFct(cfg, gcf))
+            config = self.inject_doppler_envs(cfg)
+            self.functions.append(PyloneFct(config, gcf))
         for cfg in self.config.get('layers', {}).values():
             self.layers.append(PyloneLayer(cfg, gcf))
         for cfg in self.config.get('apis', {}).values():

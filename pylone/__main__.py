@@ -46,7 +46,7 @@ push.set_defaults(handler=push_app)
 def main():
     options = parser.parse_args()
     if options.doppler_token:
-        load_doppler(options.doppler_token, options.doppler_project, options.doppler_config)
+        load_doppler(options)
     else:
         load_dotenv('.env')
 
