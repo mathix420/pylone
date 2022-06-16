@@ -10,6 +10,15 @@
 [![wakatime](https://wakatime.com/badge/github/mathix420/pylone.svg)](https://wakatime.com/badge/github/mathix420/pylone)
 [![Maintainability](https://api.codeclimate.com/v1/badges/fc078176e896556db324/maintainability)](https://codeclimate.com/github/mathix420/pylone/maintainability)
 
+# Features
+
+- Publish, update and delete Lambdas
+- Publish, update and delete Layers
+- [Doppler](https://doppler.com) integration
+- Simple and light wieght
+- Multi stages lambdas
+- Before/after deploy hooks
+
 # Usage
 
 ## Pylone usage
