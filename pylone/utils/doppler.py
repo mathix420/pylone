@@ -1,10 +1,13 @@
+from argparse import Namespace
 from base64 import b64encode
 from os import environ
 import requests
 
 
-def load_doppler(secret, project, config):
+def load_doppler(options: Namespace):
     url = "https://api.doppler.com/v3/configs/config/secrets/download"
+    project = options.doppler_project
+    config = options.doppler_config
 
     params = {
         'format': 'json',
@@ -14,6 +17,7 @@ def load_doppler(secret, project, config):
         # 'dynamic_secrets_ttl_sec': 1800,
     }
 
+    secret = options.doppler_token
     auth = b64encode(secret.encode('utf-8') + b':').decode('utf-8')
 
     headers = {
@@ -27,5 +31,9 @@ def load_doppler(secret, project, config):
         print(response.text)
         exit('Bad response code from Doppler')
 
-    for key, value in response.json().items():
+    j = response.json()
+
+    options.__setattr__('doppler_env', j)
+
+    for key, value in j.items():
         environ[key] = value
