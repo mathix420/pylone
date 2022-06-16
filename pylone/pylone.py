@@ -1,9 +1,7 @@
-from .questions import qload, ask
 from .providers import providers
-from .utils.dirs import makedirs
-from .config import save_config
 from .utils.scripts import run
 from PyInquirer import prompt
+from .questions import ask
 from typing import List
 
 from .functions import PyloneFct
@@ -13,8 +11,8 @@ from .apis import PyloneApi
 
 class PyloneProject():
     functions: List[PyloneFct] = list()
-    layers: List[PyloneApi] = list()
-    apis: List[PyloneLayer] = list()
+    layers: List[PyloneLayer] = list()
+    apis: List[PyloneApi] = list()
 
     def __init__(self, options, config):
         self.config = config
@@ -36,7 +34,9 @@ class PyloneProject():
     def _get_objects(self):
         objects = [*self.layers, *self.functions, *self.apis]
 
-        if len(objects) > 1 and ask('Multiple objects detected, Choose what to update'):
+        if self.options.objects:
+            objects = list(filter(lambda x: x.cf['name'] in self.options.objects, objects))
+        elif len(objects) > 1 and ask('Multiple objects detected, Choose what to update'):
             res = prompt({
                 "type": "checkbox",
                 "name": "objects",
@@ -44,6 +44,10 @@ class PyloneProject():
                 "message": "Choose objects to update"
             })['objects']
             objects = list(filter(lambda x: x.cf['name'] in res, objects))
+
+        if not objects:
+            exit('Aborted, no objects to perform actions')
+
         return objects
 
     def create_archi(self):
