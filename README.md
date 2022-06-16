@@ -4,6 +4,12 @@
 
 **Python CD framework**
 
+[![Pypi](https://badgen.net/pypi/v/pylone)](https://pypi.org/project/pylone/)
+[![Docker Pulls](https://badgen.net/docker/pulls/plsr/pylone?icon=docker&label=pulls)](https://hub.docker.com/r/plsr/pylone/)
+
+[![wakatime](https://wakatime.com/badge/github/mathix420/pylone.svg)](https://wakatime.com/badge/github/mathix420/pylone)
+[![Maintainability](https://api.codeclimate.com/v1/badges/fc078176e896556db324/maintainability)](https://codeclimate.com/github/mathix420/pylone/maintainability)
+
 # Usage
 
 ## Pylone usage
