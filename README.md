@@ -1,4 +1,4 @@
-<img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/google/223/tokyo-tower_1f5fc.png" width="100" height="100" align="right" alt="Pylone icon">
+<img src="https://em-content.zobj.net/thumbs/160/google/350/tokyo-tower_1f5fc.png" width="100" height="100" align="right" alt="Pylone icon">
 
 # PYLONE
 
