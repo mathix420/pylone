@@ -19,6 +19,12 @@
 - Multi stages lambdas
 - Before/after deploy hooks
 
+# Install
+
+```bash
+pip install pylone
+```
+
 # Usage
 
 ## Pylone usage
@@ -70,4 +76,17 @@ after-script: "echo 'END of process'"
 Allows you to choose the bucket name where pylone will upload zip files.
 ```yaml
 bucket-name: tmp-pylone-files
+```
+
+# DX
+
+## VSCode config
+
+`.vscode/settings.json`
+```json
+{
+    "yaml.customTags": [
+        "!env scalar"
+    ]
+}
 ```
