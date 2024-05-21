@@ -28,7 +28,7 @@ setup(
     install_requires=[
         'python-dotenv>=0.10.5',
         'PyInquirer>=1.0.3',
-        'requests==2.31.0',
+        'requests==2.32.0',
         'boto3>=1.10.24',
         'PyYAML>=3.13',
     ],
