@@ -10,15 +10,22 @@ jobs:
     name: Publish pylone
     runs-on: ubuntu-20.04
     steps:
-      - name: Install deps
-        run: |
-          pip3 install --upgrade setuptools 
-          pip3 install --upgrade wheel
-          pip3 install --upgrade twine
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: getsentry/action-setup-venv@v2.1.0
+        id: venv
+        with:
+          python-version: 3.12
+          cache-dependency-path: |
+            requirements.txt
+            requirements-dev.txt
+          install-cmd: pip install -r requirements.txt -c requirements-dev.txt
+
       - name: Building pylone
         run: python3 setup.py sdist bdist_wheel
+
       - name: Publishing
         run: "python3 -m twine upload --repository-url https://upload.pypi.org/legacy/ dist/* -u 'mathix420' -p '${{ secrets.PYPI_PASSWORD }}'"
 
@@ -31,10 +38,10 @@ jobs:
 
     steps:
       - name: Check out the repo
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Login to DockerHub
-        uses: docker/login-action@v2
+        uses: docker/login-action@v3
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
@@ -47,7 +54,7 @@ jobs:
           echo "::set-output name=tag2::${{ secrets.DOCKERHUB_USERNAME }}/pylone:$current_version"
 
       - name: Build and push Docker image
-        uses: docker/build-push-action@v3
+        uses: docker/build-push-action@v6
         id: build-image
         with:
           context: .
