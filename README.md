@@ -90,3 +90,12 @@ bucket-name: tmp-pylone-files
     ]
 }
 ```
+
+# Dev Guide
+
+## Deploy new version
+
+1. Bump version in [`setup.py`](/setup.py)
+2. Commit and push to master
+3. Create a new github release + tag using this format `vX.X.X`
+4. Github Action will take care of the rest!
