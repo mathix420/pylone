@@ -21,7 +21,7 @@ jobs:
           cache-dependency-path: |
             requirements.txt
             requirements-dev.txt
-          install-cmd: pip install -r requirements.txt -c requirements-dev.txt
+          install-cmd: pip install -r requirements.txt -r requirements-dev.txt
 
       - name: Building pylone
         run: python3 setup.py sdist bdist_wheel
