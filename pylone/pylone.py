@@ -55,7 +55,7 @@ class PyloneProject():
             res = prompt({
                 "type": "checkbox",
                 "name": "objects",
-                "choices": [{'name': obj.cf['name']} for obj in objects],
+                "choices": [obj.cf['name'] for obj in objects],
                 "message": "Choose objects to update"
             })['objects']
             objects = list(filter(lambda x: x.cf['name'] in res, objects))
