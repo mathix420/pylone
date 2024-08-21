@@ -1,7 +1,5 @@
-import os
-
 from .config import get_global_config, create_global_config
-from .utils.changes import detect_changes
+# from .utils.changes import detect_changes
 from .pylone import PyloneProject
 from .questions import ask
 

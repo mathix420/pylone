@@ -1,5 +1,3 @@
-import boto3
-
 from .function import init_lambda
 from .iam import init_iam
 from .s3 import init_s3

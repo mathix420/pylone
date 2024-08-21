@@ -1,6 +1,6 @@
-import regex
+import re
 
-name_regex = regex.compile(r'^[a-zA-Z0-9-]+$')
+name_regex = re.compile(r'^[a-zA-Z0-9-]+$')
 
 questions = [
     {

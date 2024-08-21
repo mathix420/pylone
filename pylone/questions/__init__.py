@@ -1,4 +1,4 @@
-from PyInquirer import prompt
+from InquirerLib import prompt
 from . import (
     create_function,
     global_config,

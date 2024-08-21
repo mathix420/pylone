@@ -1,7 +1,7 @@
 from .providers import providers
 from .utils.scripts import run
 from argparse import Namespace
-from PyInquirer import prompt
+from InquirerLib import prompt
 from .questions import ask
 from typing import List
 

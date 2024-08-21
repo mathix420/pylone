@@ -6,14 +6,14 @@ from .questions import qload
 from .utils.constructors import get_env
 
 variables = re.compile(r'\s(\$[A-Z_]+)\s')
-yaml.add_constructor('!env', get_env, yaml.SafeLoader)
+yaml.add_constructor('!env', get_env, yaml.CSafeLoader)
 
 
 def get_global_config():
     if not os.path.exists('pylone.yaml'):
         return None
     with open('pylone.yaml') as fp:
-        config = yaml.load(fp, yaml.SafeLoader)
+        config = yaml.load(fp, yaml.CSafeLoader)
     return config
 
 
